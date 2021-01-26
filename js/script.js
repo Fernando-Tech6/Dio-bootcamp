@@ -1,6 +1,8 @@
 
 const dino = document.querySelector('.dino');
 const background = document.querySelector('.background');
+let position = 0;
+
 
 let isJumping = false;
 
@@ -17,34 +19,33 @@ function pressSpace(event)    // controle do botão space
 
 function jump()
 {
-    let position = 0;
     isJumping = true;
     let upInterval = setInterval(() => {
 
     if (position >= 150)
     {
-        clearInterval(upInterval);
+        clearInterval(upInterval);  //Descer
 
         let downInterval = setInterval(() => {
             isJumping = false;
-            if (position <= 0)
+            if (position <= 0)         //posição inicial.
             {
-                clearInterval(downInterval);
+                clearInterval(downInterval);  
             }
             else
             {
-                position -= 20;
+                position -= 20;   //velocidade de descida.
                 dino.style.bottom = position + 'px';
             }
         },20);
     }
     else
     {
-        // para subir
-        position += 20       
+        
+        position += 20;      // para subir  
         dino.style.bottom = position + 'px';
     }
-    },20); //20 milissegundos controle de velocidade.
+    },20); //20 milissegundos.
 }
 
 function createCactus()
@@ -63,6 +64,12 @@ function createCactus()
             clearInterval(leftInterval);
             background.removeChild(cactus);
         }
+        else if(cactusPosition > 0 && cactusPosition < 60 && position < 60)   // 60 é o tamanho dem pixels do dino.
+        {
+            clearInterval(leftInterval);
+           // isGameOver = true;
+            document.body.innerHTML = '<h1 class="gameover">You Died</h1>';   // criando um body e mensagem de fim de jogo.
+        }
         else
         {
             cactusPosition -= 10;
@@ -70,19 +77,11 @@ function createCactus()
         }
         
     },20);
-    
+
     setTimeout(createCactus,cactusAleatorio);   // Chama a função para criar cactus e depois uma função aleatoria para gerar os cactus.
 }
+
 
 createCactus();   // ao iniciar o jogo o cactus vai ser criado.
 document.addEventListener('keyup', pressSpace);
 
-
-// function Veloz()
-// { 
-//      for(i=100;i>20;i-=10)
-//      {
-//          console.log("teste");
-//      }
-//     return 20; 
-// }
