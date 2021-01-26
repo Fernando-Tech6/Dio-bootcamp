@@ -4,7 +4,6 @@ const background = document.querySelector('.background');
 
 
 let isJumping = false;
-let isGameOver = false;
 let position = 0;
 
 function pressSpace(event)    // controle do botão space
@@ -57,7 +56,7 @@ function createCactus()
     let cactusPosition = 1000;
     let cactusAleatorio = Math.random() * 6000;
      
-    if (isGameOver) return;
+    
 
     cactus.style.left = 1000 + 'px';
     cactus.classList.add('cactus');
@@ -72,12 +71,11 @@ function createCactus()
         else if(cactusPosition > 0 && cactusPosition < 60 && position < 60)   // 60 é o tamanho dem pixels do dino.
         {
             clearInterval(leftInterval);
-            isGameOver = true;
             document.body.innerHTML = '<h1 class="gameover">YOU DIED</h1>';   // criando um body e mensagem de fim de jogo.
         }
         else
         {
-            cactusPosition -= 6;
+            cactusPosition -= 8;
             cactus.style.left = cactusPosition + 'px';
         }
         
