@@ -6,3 +6,12 @@
     position: absolute;
     bottom: 0;
 }
+
+.cactus
+{
+    width: 70px;
+    height: 70px;
+    background: red;
+    position: absolute;
+    bottom: 0;
+}
